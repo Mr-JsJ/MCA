@@ -1,0 +1,10 @@
+n=int(input("ENTER TH NUMBER OF TERMS"))
+first_term=0
+second_term=1
+i=0
+while(i<=n):
+  print(first_term,end=",")
+  nth=first_term+second_term
+  first_term=second_term
+  second_term=nth
+  i=i+1
