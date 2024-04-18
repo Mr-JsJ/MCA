@@ -1,0 +1,302 @@
+mysql> create table staff(ID int(5),DeptID numeric(2),Name char(15),Design char(15),Basic numeric(10,2), Gender char(1));
+Query OK, 0 rows affected, 1 warning (0.07 sec)
+
+mysql> desc staff;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| ID     | int           | YES  |     | NULL    |       |
+| DeptID | decimal(2,0)  | YES  |     | NULL    |       |
+| Name   | char(15)      | YES  |     | NULL    |       |
+| Design | char(15)      | YES  |     | NULL    |       |
+| Basic  | decimal(10,2) | YES  |     | NULL    |       |
+| Gender | char(1)       | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+
+insert into staff(ID,DeptID,Name,Design,Basic,Gender) values(101,1,'Ram','Typist',2000,'M');
+Query OK, 1 row affected (0.00 sec)
+
+insert into staff(ID,DeptID,Name,Design,Basic,Gender) values(102,2,'Arun','Analyst',6000,'M');
+Query OK, 1 row affected (0.04 sec)
+
+insert into staff(ID,DeptID,Name,Design,Basic,Gender) values(121,1,'Ruby','Typist',2010,'F');
+Query OK, 1 row affected (0.01 sec)
+
+insert into staff(ID,DeptID,Name,Design,Basic,Gender) values(156,3,'Mary','Manager',4500,'F');
+Query OK, 1 row affected (0.00 sec)
+
+insert into staff(ID,DeptID,Name,Design,Basic,Gender) values(123,2,'Mridula','Analyst',6000,'F');
+Query OK, 1 row affected (0.01 sec)
+
+insert into staff(ID,DeptID,Name,Design,Basic,Gender) values(114,4,'Menon','Clerk',1500,'M');
+Query OK, 1 row affected (0.01 sec)
+
+insert into staff(ID,DeptID,Name,Design,Basic,Gender) values(115,4,'Tim','Clerk',1500,'M');
+Query OK, 1 row affected (0.00 sec)
+
+insert into staff(ID,DeptID,Name,Design,Basic,Gender) values(127,2,'Kiran','Manager',4000,'M');
+Query OK, 1 row affected (0.00 sec)
+
+select * from staff;
++------+--------+---------+---------+---------+--------+
+| ID   | DeptID | Name    | Design  | Basic   | Gender |
++------+--------+---------+---------+---------+--------+
+|  101 |      1 | Ram     | Typist  | 2000.00 | M      |
+|  102 |      2 | Arun    | Analyst | 6000.00 | M      |
+|  121 |      1 | Ruby    | Typist  | 2010.00 | F      |
+|  156 |      3 | Mary    | Manager | 4500.00 | F      |
+|  123 |      2 | Mridula | Analyst | 6000.00 | F      |
+|  114 |      4 | Menon   | Clerk   | 1500.00 | M      |
+|  115 |      4 | Tim     | Clerk   | 1500.00 | M      |
+|  127 |      2 | Kiran   | Manager | 4000.00 | M      |
++------+--------+---------+---------+---------+--------+
+8 rows in set (0.00 sec)
+
+qustion 3
+
+select ID,Name,Design,Basic from staff;
++------+---------+---------+---------+
+| ID   | Name    | Design  | Basic   |
++------+---------+---------+---------+
+|  101 | Ram     | Typist  | 2000.00 |
+|  102 | Arun    | Analyst | 6000.00 |
+|  121 | Ruby    | Typist  | 2010.00 |
+|  156 | Mary    | Manager | 4500.00 |
+|  123 | Mridula | Analyst | 6000.00 |
+|  114 | Menon   | Clerk   | 1500.00 |
+|  115 | Tim     | Clerk   | 1500.00 |
+|  127 | Kiran   | Manager | 4000.00 |
++------+---------+---------+---------+
+8 rows in set (0.00 sec)
+
+qustion 4
+select ID,Name from staff where DeptID=2;
++------+---------+
+| ID   | Name    |
++------+---------+
+|  102 | Arun    |
+|  123 | Mridula |
+|  127 | Kiran   |
++------+---------+
+3 rows in set (0.00 sec)
+
+qustion 5
+select ID,Name,Design as Designation,DeptID,Basic,(Basic*0.075) as DA,(Basic*0.10) as HRA,(Basic+(Basic*0.075)+(Basic*0.10)) as Net_sal from staff;
++------+---------+-------------+--------+---------+-----------+----------+------------+
+| ID   | Name    | Designation | DeptID | Basic   | DA        | HRA      | Net_sal    |
++------+---------+-------------+--------+---------+-----------+----------+------------+
+|  101 | Ram     | Typist      |      1 | 2000.00 | 150.00000 | 200.0000 | 2350.00000 |
+|  102 | Arun    | Analyst     |      2 | 6000.00 | 450.00000 | 600.0000 | 7050.00000 |
+|  121 | Ruby    | Typist      |      1 | 2010.00 | 150.75000 | 201.0000 | 2361.75000 |
+|  156 | Mary    | Manager     |      3 | 4500.00 | 337.50000 | 450.0000 | 5287.50000 |
+|  123 | Mridula | Analyst     |      2 | 6000.00 | 450.00000 | 600.0000 | 7050.00000 |
+|  114 | Menon   | Clerk       |      4 | 1500.00 | 112.50000 | 150.0000 | 1762.50000 |
+|  115 | Tim     | Clerk       |      4 | 1500.00 | 112.50000 | 150.0000 | 1762.50000 |
+|  127 | Kiran   | Manager     |      2 | 4000.00 | 300.00000 | 400.0000 | 4700.00000 |
++------+---------+-------------+--------+---------+-----------+----------+------------+
+8 rows in set (0.00 sec)
+
+qustion 6
+select ID,Name,Design,Basic from staff order by Basic DESC;
++------+---------+---------+---------+
+| ID   | Name    | Design  | Basic   |
++------+---------+---------+---------+
+|  102 | Arun    | Analyst | 6000.00 |
+|  123 | Mridula | Analyst | 6000.00 |
+|  156 | Mary    | Manager | 4500.00 |
+|  127 | Kiran   | Manager | 4000.00 |
+|  121 | Ruby    | Typist  | 2010.00 |
+|  101 | Ram     | Typist  | 2000.00 |
+|  114 | Menon   | Clerk   | 1500.00 |
+|  115 | Tim     | Clerk   | 1500.00 |
++------+---------+---------+---------+
+8 rows in set (0.00 sec)
+
+qustion 7
+select * from staff where Design='Typist';
++------+--------+------+--------+---------+--------+
+| ID   | DeptID | Name | Design | Basic   | Gender |
++------+--------+------+--------+---------+--------+
+|  101 |      1 | Ram  | Typist | 2000.00 | M      |
+|  121 |      1 | Ruby | Typist | 2010.00 | F      |
++------+--------+------+--------+---------+--------+
+2 rows in set (0.00 sec)
+
+qustion 8
+select * from staff where Design in ('Typist','Manager');
++------+--------+-------+---------+---------+--------+
+| ID   | DeptID | Name  | Design  | Basic   | Gender |
++------+--------+-------+---------+---------+--------+
+|  101 |      1 | Ram   | Typist  | 2000.00 | M      |
+|  121 |      1 | Ruby  | Typist  | 2010.00 | F      |
+|  156 |      3 | Mary  | Manager | 4500.00 | F      |
+|  127 |      2 | Kiran | Manager | 4000.00 | M      |
++------+--------+-------+---------+---------+--------+
+4 rows in set (0.00 sec)
+
+qustion 9
+select distinct Design from staff;
++---------+
+| Design  |
++---------+
+| Typist  |
+| Analyst |
+| Manager |
+| Clerk   |
++---------+
+4 rows in set (0.00 sec)
+
+qustion 10
+select ID,Name,DeptID,Basic from staff where (Design='Manager' or Design='Clerk')and(Basic between 1400 and 4500);
++------+-------+--------+---------+
+| ID   | Name  | DeptID | Basic   |
++------+-------+--------+---------+
+|  156 | Mary  |      3 | 4500.00 |
+|  114 | Menon |      4 | 1500.00 |
+|  115 | Tim   |      4 | 1500.00 |
+|  127 | Kiran |      2 | 4000.00 |
++------+-------+--------+---------+
+4 rows in set (0.01 sec)
+
+qustion 11
+select count(*) from staff where Gender='M';
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.00 sec)
+
+qustion 12
+select Design,max(basic) from staff group by Design;
++---------+------------+
+| Design  | max(basic) |
++---------+------------+
+| Typist  |    2010.00 |
+| Analyst |    6000.00 |
+| Manager |    4500.00 |
+| Clerk   |    1500.00 |
++---------+------------+
+4 rows in set (0.00 sec)
+
+qustion 13
+alter table staff add Manager_id INT;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+desc staff;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| ID         | int           | YES  |     | NULL    |       |
+| DeptID     | decimal(2,0)  | YES  |     | NULL    |       |
+| Name       | char(15)      | YES  |     | NULL    |       |
+| Design     | char(15)      | YES  |     | NULL    |       |
+| Basic      | decimal(10,2) | YES  |     | NULL    |       |
+| Gender     | char(1)       | YES  |     | NULL    |       |
+| Manager_id | int           | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+qustion 14
+update staff set Manager_id=NULL where ID=101;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+update staff set Manager_id=101 where ID in(102,121,156);
+Query OK, 3 rows affected (0.00 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+update staff set Manager_id=102 where ID in(123,114,115);
+Query OK, 3 rows affected (0.00 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+update staff set Manager_id=103 where ID=127;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+select * from staff;
++------+--------+---------+---------+---------+--------+------------+
+| ID   | DeptID | Name    | Design  | Basic   | Gender | Manager_id |
++------+--------+---------+---------+---------+--------+------------+
+|  101 |      1 | Ram     | Typist  | 2000.00 | M      |       NULL |
+|  102 |      2 | Arun    | Analyst | 6000.00 | M      |        101 |
+|  121 |      1 | Ruby    | Typist  | 2010.00 | F      |        101 |
+|  156 |      3 | Mary    | Manager | 4500.00 | F      |        101 |
+|  123 |      2 | Mridula | Analyst | 6000.00 | F      |        102 |
+|  114 |      4 | Menon   | Clerk   | 1500.00 | M      |        102 |
+|  115 |      4 | Tim     | Clerk   | 1500.00 | M      |        102 |
+|  127 |      2 | Kiran   | Manager | 4000.00 | M      |        103 |
++------+--------+---------+---------+---------+--------+------------+
+8 rows in set (0.00 sec)
+
+qustion 15
+select Manager_id from staff where Name="Ram";
++------------+
+| Manager_id |
++------------+
+|       NULL |
++------------+
+1 row in set (0.00 sec)
+
+qustion 16
+select e1.Name as Employee_Name,e2.Name as Manager_Name from staff e1 join staff e2 on e2.ID=e1.Manager_id;
++---------------+--------------+
+| Employee_Name | Manager_Name |
++---------------+--------------+
+| Mary          | Ram          |
+| Ruby          | Ram          |
+| Arun          | Ram          |
+| Tim           | Arun         |
+| Menon         | Arun         |
+| Mridula       | Arun         |
+| Kiran         | Ruby         |
++---------------+--------------+
+7 rows in set (0.00 sec)
+
+qustion 17
+select avg(basic) as Avg_sal  from staff group by DeptID;
++-------------+
+| Avg_sal     |
++-------------+
+| 2005.000000 |
+| 5333.333333 |
+| 4500.000000 |
+| 1500.000000 |
++-------------+
+4 rows in set (0.00 sec)
+
+qustion 18
+select max(basic) from staff;
++------------+
+| max(basic) |
++------------+
+|    6000.00 |
++------------+
+1 row in set (0.00 sec)
+
+qustion19
+select count(*) from staff group by DeptID;
++----------+
+| count(*) |
++----------+
+|        2 |
+|        3 |
+|        1 |
+|        2 |
++----------+
+4 rows in set (0.00 sec)
+
+qustion20
+select count(distinct DeptID) from staff;
++------------------------+
+| count(distinct DeptID) |
++------------------------+
+|                      4 |
++------------------------+
+1 row in set (0.00 sec)
+
+
+

@@ -1,0 +1,602 @@
+qustion 1
+
+SELECT DISTINCT Designation FROM EMP;
++-------------+
+| Designation |
++-------------+
+| Typist      |
+| Analyst     |
+| Manager     |
+| Clerk       |
++-------------+
+4 rows in set (0.00 sec)
+
+
+qustion 2
+
+SELECT COUNT(DISTINCT Designation) FROM EMP;
++-----------------------------+
+| COUNT(DISTINCT Designation) |
++-----------------------------+
+|                           4 |
++-----------------------------+
+1 row in set (0.00 sec)
+
+
+qustion 3
+
+SELECT MAX(Salary) FROM EMP WHERE Gender="F";
++-------------+
+| MAX(Salary) |
++-------------+
+|     6000.00 |
++-------------+
+1 row in set (0.00 sec)
+
+
+qustion 4
+
+SELECT * FROM EMP WHERE Gender="F" && Designation="Typist";
++------+--------+------+-------------+---------+--------+
+| ID   | DeptID | Name | Designation | Salary  | Gender |
++------+--------+------+-------------+---------+--------+
+|  121 |      1 | Ruby | Typist      | 2010.00 | F      |
++------+--------+------+-------------+---------+--------+
+1 row in set, 1 warning (0.00 sec)
+
+
+qustion 5
+
+SELECT * FROM EMP WHERE Gender="M" && Designation="Clerk" && Salary>3000;
++------+--------+-------+-------------+---------+--------+
+| ID   | DeptID | Name  | Designation | Salary  | Gender |
++------+--------+-------+-------------+---------+--------+
+|  114 |      4 | Menon | Clerk       | 3500.00 | M      |
+|  115 |      4 | Tim   | Clerk       | 3500.00 | M      |
++------+--------+-------+-------------+---------+--------+
+2 rows in set, 2 warnings (0.00 sec)
+
+
+qustion 6
+
+SELECT * FROM EMP WHERE Designation IN ("Manager","Analyst") && DeptID=2;
++------+--------+---------+-------------+---------+--------+
+| ID   | DeptID | Name    | Designation | Salary  | Gender |
++------+--------+---------+-------------+---------+--------+
+|  102 |      2 | Arun    | Analyst     | 6000.00 | M      |
+|  123 |      2 | Mridula | Analyst     | 6000.00 | F      |
+|  127 |      2 | Kiran   | Manager     | 4000.00 | M      |
++------+--------+---------+-------------+---------+--------+
+3 rows in set, 1 warning (0.00 sec)
+
+
+qustion 7
+
+ SELECT Designation,Salary FROM EMP WHERE Name="Ruby";
++-------------+---------+
+| Designation | Salary  |
++-------------+---------+
+| Typist      | 2010.00 |
++-------------+---------+
+1 row in set (0.00 sec)
+
+
+qustion 8
+
+ALTER TABLE EMP ADD Joining_date DATE;
+Query OK, 0 rows affected (0.21 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+DESC EMP;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| ID           | int           | YES  |     | NULL    |       |
+| DeptID       | int           | YES  |     | NULL    |       |
+| Name         | char(15)      | YES  |     | NULL    |       |
+| Designation  | varchar(15)   | YES  |     | NULL    |       |
+| Salary       | decimal(10,2) | YES  |     | NULL    |       |
+| Gender       | char(1)       | YES  |     | NULL    |       |
+| Joining_date | date          | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+
+qustion 9
+
+ UPDATE EMP SET Joining_date="2023-10-22" WHERE Name="RAM";
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMP SET Joining_date="2020-01-02" WHERE Name="Arun";
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMP SET Joining_date="2019-03-06" WHERE Name="Ruby";
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMP SET Joining_date="2021-05-28" WHERE Name="Mary";
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMP SET Joining_date="2024-07-18" WHERE Name="Mridula";
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMP SET Joining_date="2022-05-12" WHERE Name="Menon";
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMP SET Joining_date="2020-11-21" WHERE Name="Tim";
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMP SET Joining_date="2020-11-21" WHERE Name="Kiran";
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+qustion 10
+
+ SELECT * FROM EMP ORDER BY Joining_date;
++------+--------+---------+-------------+---------+--------+--------------+
+| ID   | DeptID | Name    | Designation | Salary  | Gender | Joining_date |
++------+--------+---------+-------------+---------+--------+--------------+
+|  121 |      1 | Ruby    | Typist      | 2010.00 | F      | 2019-03-06   |
+|  102 |      2 | Arun    | Analyst     | 6000.00 | M      | 2020-01-02   |
+|  115 |      4 | Tim     | Clerk       | 3500.00 | M      | 2020-11-21   |
+|  127 |      2 | Kiran   | Manager     | 4000.00 | M      | 2020-11-21   |
+|  156 |      3 | Mary    | Manager     | 4500.00 | F      | 2021-05-28   |
+|  114 |      4 | Menon   | Clerk       | 3500.00 | M      | 2022-05-12   |
+|  101 |      1 | Ram     | Typist      | 4000.00 | M      | 1998-02-23   |
+|  123 |      2 | Mridula | Analyst     | 6000.00 | F      | 1997-08-13   |
++------+--------+---------+-------------+---------+--------+--------------+
+8 rows in set (0.01 sec)
+
+
+qustion 11
+
+ SELECT * FROM EMP ORDER BY Salary DESC;
++------+--------+---------+-------------+---------+--------+--------------+
+| ID   | DeptID | Name    | Designation | Salary  | Gender | Joining_date |
++------+--------+---------+-------------+---------+--------+--------------+
+|  102 |      2 | Arun    | Analyst     | 6000.00 | M      | 2020-01-02   |
+|  123 |      2 | Mridula | Analyst     | 6000.00 | F      | 1997-08-13   |
+|  156 |      3 | Mary    | Manager     | 4500.00 | F      | 2021-05-28   |
+|  101 |      1 | Ram     | Typist      | 4000.00 | M      | 1998-02-23   |
+|  127 |      2 | Kiran   | Manager     | 4000.00 | M      | 2020-11-21   |
+|  114 |      4 | Menon   | Clerk       | 3500.00 | M      | 2022-05-12   |
+|  115 |      4 | Tim     | Clerk       | 3500.00 | M      | 2020-11-21   |
+|  121 |      1 | Ruby    | Typist      | 2010.00 | F      | 2019-03-06   |
++------+--------+---------+-------------+---------+--------+--------------+
+8 rows in set (0.00 sec)
+
+qustion 12
+
+mysql> CREATE TABLE Department(DeptID INT(5) PRIMARY KEY ,Dept_name VARCHAR(20));
+Query OK, 0 rows affected, 1 warning (0.32 sec)
+
+qustion 13
+
+mysql> SET foreign_key_checks = 0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ALTER TABLE EMP  ADD CONSTRAINT FK_DeptID FOREIGN KEY(DeptID) REFERENCES Department(DeptID);
+Query OK, 0 rows affected (0.35 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+qustion 14
+
+INSERT INTO Department VALUES(1,"Design"),(2,"Coding"),(3,"Testing"),(4,"Research");
+Query OK, 4 rows affected (0.06 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+
+qustion 15
+
+SELECT e.Name,d.Dept_name FROM EMP e JOIN Department d ON e.DeptID=d.DeptID;
++---------+-----------+
+| Name    | Dept_name |
++---------+-----------+
+| Ram     | Design    |
+| Ruby    | Design    |
+| Arun    | Coding    |
+| Mridula | Coding    |
+| Kiran   | Coding    |
+| Mary    | Testing   |
+| Menon   | Research  |
+| Tim     | Research  |
++---------+-----------+
+8 rows in set (0.00 sec)
+
+qustion 16
+
+ SELECT Department.Dept_name as Department FROM EMP JOIN Department ON EMP.DeptID=Department.DeptID WHERE EMP.Name="Arun";
++------------+
+| Department |
++------------+
+| Coding     |
++------------+
+1 row in set (0.00 sec)
+
+
+qustion 17
+
+ SELECT Salary FROM EMP WHERE DeptID=(SELECT DeptID FROM Department WHERE Dept_name="Design");
++---------+
+| Salary  |
++---------+
+| 4000.00 |
+| 2010.00 |
++---------+
+2 rows in set (0.00 sec)
+
+qustion 18
+
+SELECT * FROM EMP WHERE Designation="Typist" && DeptID=(SELECT DeptID FROM Department WHERE Dept_name="Design");
++------+--------+------+-------------+---------+--------+--------------+
+| ID   | DeptID | Name | Designation | Salary  | Gender | Joining_date |
++------+--------+------+-------------+---------+--------+--------------+
+|  101 |      1 | Ram  | Typist      | 4000.00 | M      | 1998-02-23   |
+|  121 |      1 | Ruby | Typist      | 2010.00 | F      | 2019-03-06   |
++------+--------+------+-------------+---------+--------+--------------+
+2 rows in set, 1 warning (0.00 sec)
+
+qustion 19
+
+SELECT Salary FROM EMP WHERE DeptID=(SELECT DeptID FROM Department WHERE Dept_name="Research");
++---------+
+| Salary  |
++---------+
+| 3500.00 |
+| 3500.00 |
++---------+
+2 rows in set (0.00 sec)
+
+
+qustion 20
+
+SELECT * FROM EMP WHERE Gender="F" && DeptID=(SELECT DeptID FROM Department WHERE Dept_name="Testing");
++------+--------+------+-------------+---------+--------+--------------+
+| ID   | DeptID | Name | Designation | Salary  | Gender | Joining_date |
++------+--------+------+-------------+---------+--------+--------------+
+|  156 |      3 | Mary | Manager     | 4500.00 | F      | 2021-05-28   |
++------+--------+------+-------------+---------+--------+--------------+
+1 row in set, 1 warning (0.00 sec)
+
+
+qustion 21
+
+SELECT * FROM EMP WHERE DeptID NOT IN(SELECT DeptID FROM Department WHERE Dept_name IN("Coding","Testing"));
++------+--------+-------+-------------+---------+--------+--------------+
+| ID   | DeptID | Name  | Designation | Salary  | Gender | Joining_date |
++------+--------+-------+-------------+---------+--------+--------------+
+|  101 |      1 | Ram   | Typist      | 4000.00 | M      | 1998-02-23   |
+|  121 |      1 | Ruby  | Typist      | 2010.00 | F      | 2019-03-06   |
+|  114 |      4 | Menon | Clerk       | 3500.00 | M      | 2022-05-12   |
+|  115 |      4 | Tim   | Clerk       | 3500.00 | M      | 2020-11-21   |
++------+--------+-------+-------------+---------+--------+--------------+
+4 rows in set (0.00 sec)
+
+qustion 22
+
+ SELECT Dept_name FROM Department WHERE DeptID IN (SELECT DeptID FROM EMP WHERE Salary=(SELECT MAX(Salary) FROM EMP));
++-----------+
+| Dept_name |
++-----------+
+| Coding    |
++-----------+
+1 row in set (0.00 sec)
+
+qustion 23
+
+SELECT Dept_name from Department where DeptID=(select DeptID from EMP group by DeptID order by count(*) asc limit 1);
++-----------+
+| Dept_name |
++-----------+
+| Testing   |
++-----------+
+1 row in set (0.00 sec
+qustion 24
+
+SELECT DISTINCT Salary  FROM EMP  ORDER BY Salary DESC  LIMIT 1 OFFSET 1;
++---------+
+| Salary  |
++---------+
+| 4500.00 |
++---------+
+1 row in set (0.00 sec)
+
+qustion 25
+
+SELECT DISTINCT Salary  FROM EMP  ORDER BY Salary ASC  LIMIT 1 OFFSET 1;
++---------+
+| Salary  |
++---------+
+| 3500.00 |
++---------+
+1 row in set (0.00 sec)
+
+qustion 26
+
+SELECT Name FROM EMP WHERE Salary>(SELECT AVG(Salary) FROM EMP WHERE DeptID = EMP.DeptID);
++---------+
+| Name    |
++---------+
+| Arun    |
+| Mary    |
+| Mridula |
++---------+
+3 rows in set (0.01 sec)
+
+qustion 27
+
+
+SELECT EMP.Name FROM EMP JOIN EMP AS Manager ON EMP.Manger_ID=Manager.ID WHERE Manager.Name='Ram';
++------+
+| Name |
++------+
+| Arun |
+| Ruby |
+| Mary |
++------+
+3 rows in set (0.00 sec)
+
+qustion 28
+
+ SELECT DeptID,COUNT(*) AS "NO_OF_DEPT_EMPLOYEES" FROM EMP GROUP BY DeptID HAVING COUNT(*)>2;
++--------+----------------------+
+| DeptID | NO_OF_DEPT_EMPLOYEES |
++--------+----------------------+
+|      2 |                    3 |
++--------+----------------------+
+1 row in set (0.00 sec)
+
+
+qustion 29
+ 
+select DeptID,min(Salary) as "lowest salary" from EMP group by DeptID having min(Salary)>2500;
++--------+---------------+
+| DeptID | lowest salary |
++--------+---------------+
+|      2 |       4000.00 |
+|      3 |       4500.00 |
+|      4 |       3500.00 |
++--------+---------------+
+3 rows in set (0.00 sec)
+
+qustion 30
+ SELECT e.Name FROM EMP AS e JOIN (SELECT DeptID, MAX(Salary) AS max_salary FROM EMP GROUP BY DeptID ) AS max_salaries  ON e.DeptID = max_salaries.DeptID AND e.Salary = max_salaries.max_salary;
++---------+
+| Name    |
++---------+
+| Ram     |
+| Arun    |
+| Mary    |
+| Mridula |
+| Menon   |
+| Tim     |
++---------+
+6 rows in set (0.01 sec)
+
+qustion 31
+
+select e1.Name from EMP as e1 join EMP as e2 on e1.Salary>e2.Salary group by e1.Name;
++---------+
+| Name    |
++---------+
+| Mridula |
+| Mary    |
+| Arun    |
+| Kiran   |
+| Tim     |
+| Menon   |
+| Ram     |
++---------+
+
+qustion 32
+
+select distinct e1.Name from EMP as e1 join EMP as e2 on e1.Salary<>e2.Salary;
++---------+
+| Name    |
++---------+
+| Tim     |
+| Menon   |
+| Mridula |
+| Mary    |
+| Ruby    |
+| Arun    |
+| Kiran   |
+| Ram     |
++---------+
+8 rows in set (0.00 sec)
+
+qustion 33
+
+ALTER TABLE EMP ADD COLUMN City VARCHAR(20);
+Query OK, 0 rows affected (0.48 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+qustion 34
+
+ALTER TABLE Department ADD COLUMN City VARCHAR(20);
+Query OK, 0 rows affected (0.24 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+qustion 35
+
+SELECT e.name FROM EMP e INNER JOIN Department d ON e.city=d.city WHERE e.city=d.city;
++---------+
+| name    |
++---------+
+| Ram     |
+| Arun    |
+| Ruby    |
+| Mary    |
+| Mridula |
+| Menon   |
+| Tim     |
+| Kiran   |
++---------+
+8 rows in set (0.00 sec)
+
+qustion 36
+
+SELECT Dept_Name FROM Department WHERE DeptID=(SELECT DeptID  FROM EMP GROUP BY DeptID ORDER BY SUM(Salary) LIMIT 1);
++-----------+
+| Dept_Name |
++-----------+
+| Testing   |
++-----------+
+1 row in set (0.00 sec)
+
+
+qustion 37
+
+SELECT Name FROM EMP WHERE YEAR(Joining_date) BETWEEN 1990 AND 1999;
++---------+
+| Name    |
++---------+
+| Ram     |
+| Mridula |
++---------+
+2 rows in set (0.00 sec)
+
+
+qustion 38
+
+SELECT Name FROM EMP WHERE MONTH(Joining_date)=08;
++---------+
+| Name    |
++---------+
+| Mridula |
++---------+
+1 row in set (0.00 sec)
+
+
+qustion 39
+
+SELECT Dept_name FROM Department d LEFT JOIN EMP e ON d.DeptID=e.DeptID WHERE e.DeptID IS null;
++-----------+
+| Dept_name |
++-----------+
+| Marketing |
++-----------+
+1 row in set (0.00 sec)
+
+
+qustion 40
+
+SELECT DeptID, COUNT(*) AS NO_OF_EMPLOYEES   FROM EMP   GROUP BY DeptID   HAVING COUNT(*) > 2;
++--------+-----------------+
+| DeptID | NO_OF_EMPLOYEES |
++--------+-----------------+
+|      2 |               3 |
++--------+-----------------+
+1 row in set (0.00 sec)
+
+
+qustion 41
+
+SELECT DeptID, COUNT(*) as num_employees_over_5000 FROM EMP WHERE Salary > 5000 GROUP BY DeptID HAVING COUNT(*) > 4;
++--------+-------------------------+
+| DeptID | num_employees_over_5000 |
++--------+-------------------------+
+|      2 |                       5 |
++--------+-------------------------+
+1 row in set (0.00 sec)
+
+qustion 42
+insert into EMP(ID,DeptID,Name,Designation,Salary,Gender,Joining_date,Manger_ID,City) values(null,null,'Rob','Clerk',6500,'M',"2006-02-10",101,'Delhi');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from EMP;
++------+--------+---------+-------------+---------+--------+--------------+-----------+--------+
+| ID   | DeptID | Name    | Designation | Salary  | Gender | Joining_date | Manger_ID | City   |
++------+--------+---------+-------------+---------+--------+--------------+-----------+--------+
+|  101 |      1 | Ram     | Typist      | 4000.00 | M      | 1998-02-23   |      NULL | Kochi  |
+|  102 |      2 | Arun    | Analyst     | 6000.00 | M      | 2020-01-02   |       101 | Delhi  |
+|  121 |      1 | Ruby    | Typist      | 2010.00 | F      | 2019-03-06   |       101 | Kochi  |
+|  156 |      3 | Mary    | Manager     | 4500.00 | F      | 2021-05-28   |       101 | Jaipur |
+|  123 |      2 | Mridula | Analyst     | 6000.00 | F      | 1997-08-13   |       102 | Jaipur |
+|  114 |      4 | Menon   | Clerk       | 3500.00 | M      | 2022-05-12   |       102 | Kochi  |
+|  115 |      4 | Tim     | Clerk       | 3500.00 | M      | 2020-11-21   |       102 | Mumbay |
+|  127 |      2 | Kiran   | Manager     | 4000.00 | M      | 2020-11-21   |       121 | Mumbay |
+|  107 |      2 | Ramu    | Analyst     | 7000.00 | M      | 2002-10-08   |       121 | Delhi  |
+|  108 |      2 | Sam     | Tester      | 6500.00 | M      | 2003-01-08   |       102 | Kochi  |
+|  110 |      2 | Roy     | Tester      | 6500.00 | M      | 2004-01-08   |       102 | Delhi  |
+| NULL |   NULL | Rob     | Clerk       | 6500.00 | M      | 2006-02-10   |       101 | Delhi  |
++------+--------+---------+-------------+---------+--------+--------------+-----------+--------+
+
+insert into EMP(ID,Name,DeptID)values(124,"Rob",3);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from EMP;
++------+--------+---------+-------------+---------+--------+--------------+-----------+--------+
+| ID   | DeptID | Name    | Designation | Salary  | Gender | Joining_date | Manger_ID | City   |
++------+--------+---------+-------------+---------+--------+--------------+-----------+--------+
+|  101 |      1 | Ram     | Typist      | 4000.00 | M      | 1998-02-23   |      NULL | Kochi  |
+|  102 |      2 | Arun    | Analyst     | 6000.00 | M      | 2020-01-02   |       101 | Delhi  |
+|  121 |      1 | Ruby    | Typist      | 2010.00 | F      | 2019-03-06   |       101 | Kochi  |
+|  156 |      3 | Mary    | Manager     | 4500.00 | F      | 2021-05-28   |       101 | Jaipur |
+|  123 |      2 | Mridula | Analyst     | 6000.00 | F      | 1997-08-13   |       102 | Jaipur |
+|  114 |      4 | Menon   | Clerk       | 3500.00 | M      | 2022-05-12   |       102 | Kochi  |
+|  115 |      4 | Tim     | Clerk       | 3500.00 | M      | 2020-11-21   |       102 | Mumbay |
+|  127 |      2 | Kiran   | Manager     | 4000.00 | M      | 2020-11-21   |       121 | Mumbay |
+|  107 |      2 | Ramu    | Analyst     | 7000.00 | M      | 2002-10-08   |       121 | Delhi  |
+|  108 |      2 | Sam     | Tester      | 6500.00 | M      | 2003-01-08   |       102 | Kochi  |
+|  110 |      2 | Roy     | Tester      | 6500.00 | M      | 2004-01-08   |       102 | Delhi  |
+| NULL |   NULL | Rob     | Clerk       | 6500.00 | M      | 2006-02-10   |       101 | Delhi  |
+|  124 |      3 | Rob     | NULL        |    NULL | NULL   | NULL         |      NULL | NULL   |
++------+--------+---------+-------------+---------+--------+--------------+-----------+--------+
+13 rows in set (0.00 sec)
+
+
+
+qustion 43
+
+SELECT e.Name,d.DeptID FROM EMP e LEFT JOIN Department d ON e.DeptID = d.DeptID;
++---------+--------+
+| Name    | DeptID |
++---------+--------+
+| Ram     |      1 |
+| Arun    |      2 |
+| Ruby    |      1 |
+| Mary    |      3 |
+| Mridula |      2 |
+| Menon   |      4 |
+| Tim     |      4 |
+| Kiran   |      2 |
+| Ramu    |      2 |
+| Sam     |      2 |
+| Roy     |      2 |
+| Rob     |   NULL |
+| Rob     |      3 |
++---------+--------+
+13 rows in set (0.00 sec)
+
+qustion 44
+
+
+SELECT e.Name, IFNULL(d.DeptID, 0) AS DeptID FROM EMP e LEFT JOIN Department d ON e.DeptID = d.DeptID;
++---------+--------+
+| Name    | DeptID |
++---------+--------+
+| Ram     |      1 |
+| Arun    |      2 |
+| Ruby    |      1 |
+| Mary    |      3 |
+| Mridula |      2 |
+| Menon   |      4 |
+| Tim     |      4 |
+| Kiran   |      2 |
+| Ramu    |      2 |
+| Sam     |      2 |
+| Roy     |      2 |
+| Rob     |      0 |
+| Rob     |      3 |
++---------+--------+
+13 rows in set (0.01 sec)
+
